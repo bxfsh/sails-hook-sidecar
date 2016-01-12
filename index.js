@@ -21,18 +21,18 @@ module.exports = function (sails) {
     },
 
     /**
-     * register itself with consul
-     */
-    _registerWithConsul: function _registerWithConsul() {
-      // TODO: to implement
-    },
-
-    /**
      * Intialise the hook
      */
     initialize: function(cb) {
       // do stuff
       return cb();
+    },
+
+    /**
+     * register itself with consul
+     */
+    registerWithConsul: function registerWithConsul() {
+      // TODO: to implement
     },
 
     /**
