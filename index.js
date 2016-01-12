@@ -41,7 +41,6 @@ module.exports = function (sails) {
     configure: function() {
 
       this._findRouterFromConsul();
-      this._registerWithConsul();
 
     },
 
