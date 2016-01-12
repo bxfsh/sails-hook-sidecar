@@ -1,0 +1,4 @@
+# sails-hook-sidecar
+
+sidecar
+
