@@ -6,6 +6,28 @@ module.exports = function (sails) {
   return {
 
     /**
+     * Tries to to find AD-BOX router from consul
+     */
+    _findRouterFromConsul: function _findRouterFromConsul() {
+      _consulService.findService('ad-box').then(function(service) {
+
+        // TODO: set environment var if found
+
+        console.log('findService success'.green, arguments);
+
+      }, function() {
+        console.log(arguments);
+      });
+    },
+
+    /**
+     * register itself with consul
+     */
+    _registerWithConsul: function _registerWithConsul() {
+      // TODO: to implement
+    },
+
+    /**
      * Intialise the hook
      */
     initialize: function(cb) {
@@ -18,17 +40,12 @@ module.exports = function (sails) {
      */
     configure: function() {
 
-      _consulService.findService('ad-box').then(function(service) {
-
-        // TODO: set environment var if found
-
-        console.log('findService success'.green, arguments);
-
-      }, function() {
-        console.log(arguments);
-      });
+      this._findRouterFromConsul();
+      this._registerWithConsul();
 
     },
+
+    // ROUTES
 
     routes: {
       before: {
@@ -37,7 +54,7 @@ module.exports = function (sails) {
          * logs stuff on any GET
          */
         'GET /*' : function(req, res, next) {
-          console.log('test');
+          sails.log.verbose('GET: '.yellow, req.originalUrl);
           next();
         },
 
