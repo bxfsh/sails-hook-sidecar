@@ -1,0 +1,22 @@
+{
+  "name": "@username/sails-hook-sidecar",
+  "version": "1.0.0",
+  "description": "boxfish sidecar",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "sails": {
+    "isHook": true
+  },
+  "author": "Daniel Oliveira <daniel@boxfish.com> (https://boxfish.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "sails": "~0.11.0"
+  },
+  "dependencies": {
+    "boxfishconsul": "^1.0.8",
+    "install": "^0.4.1",
+    "npm": "^3.5.3"
+  }
+}
