@@ -1,13 +1,16 @@
 require('colors');
+var _consulService = require('boxfishconsul').init();
 
 module.exports = function (sails) {
 
- return {
+  return {
 
+    /**
+     * Intialise the hook
+     */
     initialize: function(cb) {
-     this.numRequestsSeen = 0;
-     this.numUnhandledRequestsSeen = 0;
-     return cb();
+      // do stuff
+      return cb();
     },
 
     /**
@@ -15,21 +18,13 @@ module.exports = function (sails) {
      */
     configure: function() {
 
-      console.log('configure');
-
-      this.consulService = require('boxfishconsul').init();
-
-      console.log(this.consulService.findService);
-
-      this.consulService.findService('ad-box').then(function(service) {
+      _consulService.findService('ad-box').then(function(service) {
 
         // TODO: set environment var if found
 
         console.log('findService success'.green, arguments);
 
-
       }, function() {
-        console.log('?');
         console.log(arguments);
       });
 
@@ -46,11 +41,20 @@ module.exports = function (sails) {
           next();
         },
 
+        /**
+         *
+         */
         'GET /test': function (req, res, next) {
           this.numRequestsSeen++;
           return res.json({
             test: 'just a test',
             num: this.numRequestsSeen
+          });
+        },
+
+        'GET /health': function(req, res, next) {
+          _consulService.nodeList(function(list) {
+            return res.json(list);
           });
         }
       },
