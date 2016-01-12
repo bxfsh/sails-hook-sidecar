@@ -24,15 +24,43 @@ module.exports = function (sails) {
      * Intialise the hook
      */
     initialize: function(cb) {
-      // do stuff
+
+      var self = this;
+
+      this.name = require('../../../package.json').name;
+
+      // deregister on sails lower
+      sails.on('lower', function() {
+        console.log('lowering sails'.yellow, self.name);
+        self.deregisterWithConsul(self.name);
+      });
+
+      // register the service
+      this.registerWithConsul(this.name);
+
       return cb();
     },
 
     /**
      * register itself with consul
      */
-    registerWithConsul: function registerWithConsul() {
-      // TODO: to implement
+    registerWithConsul: function registerWithConsul(name) {
+      var self = this;
+      _consulService.api.agent.service.register(name, function(err) {
+        if (err) sails.log.error(err);
+        else sails.log.info(self.name + ' registered successfully');
+      });
+    },
+
+    /**
+     * deregister itself
+     */
+    deregisterWithConsul: function deregisterWithConsul(name) {
+      var self = this;
+      _consulService.api.agent.service.deregister(name, function(err) {
+        if (err) sails.log.error(err);
+        else sails.log.info(self.name + ' deregistered successfully');
+      });
     },
 
     /**
