@@ -85,9 +85,11 @@ module.exports = function (sails) {
      * Configure the hook
      */
     configure: function() {
+      
+      var self = this;
 
       sails.on('hook:orm:loaded', function() {
-        this._findRouterFromConsul();
+        self._findRouterFromConsul();
       });
 
     },
