@@ -11,9 +11,15 @@ module.exports = function (sails) {
     _findRouterFromConsul: function _findRouterFromConsul() {
       _consulService.findService('ad-box').then(function(service) {
 
-        // TODO: set environment var if found
-
-        console.log('findService success'.green, arguments);
+        if (!service) {
+          sails.log.error('ad-box not registered with consul');
+        } else {
+          // setting env var
+          process.env.AD_BOX = service;
+          sails.log.info('setting ad box', JSON.stringify(process.env.AD_BOX));
+          // override the config host
+          sails.config.adBox.host = service.Address;
+        }
 
       }, function() {
         console.log(arguments);
