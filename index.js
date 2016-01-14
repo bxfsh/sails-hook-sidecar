@@ -9,6 +9,18 @@ module.exports = function (sails) {
      * Tries to to find AD-BOX router from consul
      */
     _findRouterFromConsul: function _findRouterFromConsul() {
+
+      if (typeof sails.config.adBox !== 'undefined' && typeof sails.config.adBox.host !== 'undefined') {
+        sails.log.info('AdBox is already defined so we wont override it');
+        return;
+      }
+
+      if (!sails.config.adBox) {
+        sails.config.adBox = {
+          port: 8080 // default port for the router
+        };
+      }
+
       _consulService.findService('ad-box').then(function(service) {
 
         if (!service) {
