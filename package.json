@@ -1,5 +1,5 @@
 {
-  "name": "@username/sails-hook-sidecar",
+  "name": "@bxfsh/sails-hook-sidecar",
   "version": "1.0.0",
   "description": "boxfish sidecar",
   "main": "index.js",
