@@ -21,7 +21,7 @@ module.exports = function (sails) {
         };
       }
 
-      _consulService.findService('ad-box').then(function(service) {
+      _consulService.findService('router').then(function(service) {
 
         if (!service) {
           sails.log.error('ad-box not registered with consul');
