@@ -85,7 +85,7 @@ module.exports = function (sails) {
     /**
      * discovers the router ( ad-box ) in consul
      */
-    discoverRouterInConsul: () => {
+    discoverRouterInConsul: function discoverRouterInConsul() {
 
       'use strict';
 
