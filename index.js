@@ -55,6 +55,7 @@ module.exports = function (sails) {
 
       // register the service
       this.registerWithConsul(this.name);
+      this.discoverRouterInConsul();
 
       return cb();
     },
@@ -82,10 +83,31 @@ module.exports = function (sails) {
     },
 
     /**
+     * discovers the router ( ad-box ) in consul
+     */
+    discoverRouterInConsul: () {
+
+      'use strict';
+
+      if (sails.config.environment !== 'development') {
+
+        _consulService.findService('router').then((instance) => {
+
+          sails.log.debug('AD-BOX from consul', instance);
+          sails.config.adBox.host = instance.Address;
+          sails.config.adBox.port = instance.ServicePort;
+        }, (error) => {
+
+          console.log(error);
+        });
+      }
+    },
+
+    /**
      * Configure the hook
      */
     configure: function() {
-      
+
       var self = this;
 
       sails.on('hook:orm:loaded', function() {
