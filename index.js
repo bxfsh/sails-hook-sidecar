@@ -91,12 +91,12 @@ module.exports = function (sails) {
 
       if (sails.config.environment !== 'development') {
 
-        _consulService.findService('router').then((instance) => {
+        _consulService.findService('router').then(function(instance) {
 
           sails.log.debug('AD-BOX from consul', instance);
           sails.config.adBox.host = instance.Address;
           sails.config.adBox.port = instance.ServicePort;
-        }, (error) => {
+        }, function(error) {
 
           console.log(error);
         });
