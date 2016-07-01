@@ -1,6 +1,6 @@
 {
   "name": "@bxfsh/sails-hook-sidecar",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "boxfish sidecar",
   "main": "index.js",
   "scripts": {
