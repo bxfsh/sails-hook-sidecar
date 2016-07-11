@@ -89,6 +89,10 @@ module.exports = function (sails) {
 
       'use strict';
 
+      if (sails.config.adBox && sails.config.adBox.host && sails.config.adBox.port) {
+        return sails.log.debug('sails.config.adBox id defined we will not override the settings');
+      }
+
       if (sails.config.environment !== 'development') {
 
         _consulService.findService('router').then(function(instance) {
