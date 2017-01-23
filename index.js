@@ -45,7 +45,7 @@ module.exports = function (sails) {
 
       var self = this;
 
-      this.name = require('../../../package.json').name;
+      this.name = require('../../package.json').name;
 
       // deregister on sails lower
       sails.on('lower', function() {
