@@ -93,7 +93,7 @@ module.exports = function (sails) {
         return sails.log.debug('sails.config.adBox id defined we will not override the settings');
       }
 
-      if (sails.config.environment !== 'development') {
+      if (sails.config.environment !== 'development' && sails.config.environment !== 'local') {
 
         _consulService.findService('router').then(function(instance) {
 
