@@ -1,7 +1,8 @@
 require('colors');
-var _consulService = require('boxfishconsul').init();
 
 module.exports = function (sails) {
+
+  const _consulService = require('boxfishconsul').init(sails);
 
   return {
 
